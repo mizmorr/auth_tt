@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/mizmorr/auth/config"
-	"github.com/mizmorr/songslib/pkg/util"
+	"github.com/mizmorr/auth/pkg/logger"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -25,7 +25,7 @@ var (
 
 func Dial(ctx context.Context) (*DB, error) {
 	conf := config.Get()
-	log := util.GetLogger(ctx)
+	log := logger.GetLoggerFromContext(ctx)
 	if conf.PgURL == "" {
 		return nil, errors.New("PG_URL is not set")
 	}

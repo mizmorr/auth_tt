@@ -4,21 +4,40 @@ import (
 	"context"
 	"time"
 
+	"github.com/google/uuid"
+	"github.com/mizmorr/auth/internal/domain"
+	"github.com/mizmorr/auth/internal/repository"
+	"github.com/mizmorr/auth/pkg/logger"
 	"github.com/mizmorr/auth/store/migrations"
 	"github.com/mizmorr/auth/store/pg"
-	"github.com/mizmorr/songslib/pkg/util"
 	"github.com/pkg/errors"
 )
 
+type SessionRepo interface {
+	Create(ctx context.Context, session *domain.Session) (string, error)
+	Delete(ctx context.Context, session *domain.Session) error
+}
+
+type UserRepo interface {
+	Create(ctx context.Context, user *domain.User) (uuid.UUID, error)
+	UpdateActiveSession(ctx context.Context, user *domain.User) (uuid.UUID, error)
+}
+
+var (
+	_ UserRepo    = (*repository.UserRepository)(nil)
+	_ SessionRepo = (*repository.SessionRepository)(nil)
+)
+
 type Store struct {
-	Pg         *pg.DB
-	Repository any
+	Pg                *pg.DB
+	SessionRepository SessionRepo
+	UserRepository    UserRepo
 }
 
 var store Store
 
 func New(ctx context.Context) (*Store, error) {
-	logger := util.GetLogger(ctx)
+	logger := logger.GetLoggerFromContext(ctx)
 
 	logger.Debug().Msg("Initializing PostgreSQL store")
 	pg, err := pg.Dial(ctx)
@@ -34,8 +53,9 @@ func New(ctx context.Context) (*Store, error) {
 	if pg != nil {
 		store.Pg = pg
 		go store.keepAlive(ctx)
-		var repo interface{}
-		store.Repository = repo
+		store.UserRepository = repository.NewUserRepository(pg)
+		store.SessionRepository = repository.NewSessionRepository(pg)
+
 	}
 	logger.Info().Msg("PostgreSQL store initialized successfully")
 	return &store, nil
@@ -44,7 +64,7 @@ func New(ctx context.Context) (*Store, error) {
 const KeepALiveTimeout = 5
 
 func (store *Store) keepAlive(ctx context.Context) {
-	logger := util.GetLogger(ctx)
+	logger := logger.GetLoggerFromContext(ctx)
 	for {
 		time.Sleep(time.Second * KeepALiveTimeout)
 		var (

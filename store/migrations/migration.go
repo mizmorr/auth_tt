@@ -4,12 +4,12 @@ import (
 	"context"
 
 	"github.com/mizmorr/auth/internal/domain"
-	"github.com/mizmorr/songslib/pkg/util"
+	"github.com/mizmorr/auth/pkg/logger"
 	"gorm.io/gorm"
 )
 
 func AutoMigrate(ctx context.Context, db *gorm.DB) error {
-	logger := util.GetLogger(ctx)
+	logger := logger.GetLoggerFromContext(ctx)
 
 	logger.Debug().Msg("Running migrations..")
 
