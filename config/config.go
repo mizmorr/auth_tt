@@ -27,7 +27,7 @@ var (
 	config Config
 )
 
-const projectDirName = "songslib"
+const projectDirName = "auth"
 
 func Get() *Config {
 	once.Do(func() {
