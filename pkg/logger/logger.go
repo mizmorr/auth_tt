@@ -7,7 +7,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mizmorr/auth/config"
 	"github.com/rs/zerolog"
 )
 
@@ -20,12 +19,11 @@ var (
 	once   sync.Once
 )
 
-func Get() *Logger {
+func Get(logLevel string) *Logger {
 	once.Do(func() {
 		writer := newConsoleWriter()
 		zeroLogger := zerolog.New(writer).With().Logger()
-		cfg := config.Get()
-		switch cfg.LogLevel {
+		switch logLevel {
 		case "debug":
 			zerolog.SetGlobalLevel(zerolog.DebugLevel)
 		case "info":
