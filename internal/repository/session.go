@@ -3,8 +3,8 @@ package repository
 import (
 	"context"
 
-	"github.com/mizmorr/auth/internal/domain"
-	"github.com/mizmorr/auth/store/pg"
+	"github.com/mizmorr/auth_tt/internal/domain"
+	"github.com/mizmorr/auth_tt/store/pg"
 	"github.com/pkg/errors"
 )
 

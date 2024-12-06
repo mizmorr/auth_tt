@@ -27,7 +27,7 @@ var (
 	config Config
 )
 
-const projectDirName = "auth"
+const projectDirName = "auth_tt"
 
 func Get() *Config {
 	once.Do(func() {

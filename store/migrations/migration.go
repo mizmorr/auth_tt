@@ -3,8 +3,8 @@ package migrations
 import (
 	"context"
 
-	"github.com/mizmorr/auth/internal/domain"
-	"github.com/mizmorr/auth/pkg/logger"
+	"github.com/mizmorr/auth_tt/internal/domain"
+	"github.com/mizmorr/auth_tt/pkg/logger"
 	"gorm.io/gorm"
 )
 

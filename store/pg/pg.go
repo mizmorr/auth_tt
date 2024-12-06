@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mizmorr/auth/config"
-	"github.com/mizmorr/auth/pkg/logger"
+	"github.com/mizmorr/auth_tt/config"
+	"github.com/mizmorr/auth_tt/pkg/logger"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

@@ -5,11 +5,11 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/mizmorr/auth/internal/domain"
-	"github.com/mizmorr/auth/internal/repository"
-	"github.com/mizmorr/auth/pkg/logger"
-	"github.com/mizmorr/auth/store/migrations"
-	"github.com/mizmorr/auth/store/pg"
+	"github.com/mizmorr/auth_tt/internal/domain"
+	"github.com/mizmorr/auth_tt/internal/repository"
+	"github.com/mizmorr/auth_tt/pkg/logger"
+	"github.com/mizmorr/auth_tt/store/migrations"
+	"github.com/mizmorr/auth_tt/store/pg"
 	"github.com/pkg/errors"
 )
 

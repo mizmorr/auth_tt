@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/google/uuid"
-	"github.com/mizmorr/auth/internal/domain"
-	"github.com/mizmorr/auth/store/pg"
+	"github.com/mizmorr/auth_tt/internal/domain"
+	"github.com/mizmorr/auth_tt/store/pg"
 )
 
 type UserRepository struct {

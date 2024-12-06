@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/mizmorr/auth/pkg/logger"
+	"github.com/mizmorr/auth_tt/pkg/logger"
 )
 
 func TestInit(t *testing.T) {
